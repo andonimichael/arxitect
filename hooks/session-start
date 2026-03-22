@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# SessionStart hook for Arxitect.
+# Reads the using-arxitect skill and injects it into the session context.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_DIR="$(dirname "$SCRIPT_DIR")"
+SKILL_FILE="$PLUGIN_DIR/skills/using-arxitect/SKILL.md"
+
+if [ ! -f "$SKILL_FILE" ]; then
+  exit 0
+fi
+
+SKILL_CONTENT=$(cat "$SKILL_FILE")
+
+# JSON-escape the content
+ESCAPED=$(printf '%s' "$SKILL_CONTENT" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
+
+cat <<HOOK_EOF
+{
+  "hookSpecificOutput": {
+    "additionalContext": "<ARXITECT>\n${ESCAPED:1:${#ESCAPED}-2}\n</ARXITECT>"
+  }
+}
+HOOK_EOF
