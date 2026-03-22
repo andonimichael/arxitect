@@ -6,7 +6,7 @@ description: Bootstrap skill that teaches Claude how to discover and use Arxitec
 # Using Arxitect
 
 You have Arxitect loaded. Arxitect enforces best-practice software design
-principles through an agentic architecture feedback loop. Three agents
+principles through an agentic architecture feedback loop. Four agents
 collaborate to produce well-designed code:
 
 1. **Code Implementer** — writes code based on requirements and review
@@ -16,6 +16,8 @@ collaborate to produce well-designed code:
 3. **Clean Architecture Reviewer** — evaluates component cohesion, coupling
    principles, and quality attributes (testability, extensibility,
    maintainability)
+4. **API Design Reviewer** — evaluates naming conventions, self-documenting
+   interfaces, type safety, and REST endpoint design
 
 ## Available Skills
 
@@ -26,6 +28,7 @@ Use the `Skill` tool to load these skills when applicable:
 | `arxitect:architecture-loop` | Implementing code with architecture enforcement. Runs the full implement → review → iterate loop. |
 | `arxitect:oo-design-review` | Standalone OO design review: SOLID, DRY, GoF patterns. No implementation, review only. |
 | `arxitect:clean-architecture-review` | Standalone architecture review: cohesion, coupling, quality attributes. No implementation, review only. |
+| `arxitect:api-design-review` | Standalone API design review: naming, signatures, types, REST conventions. No implementation, review only. |
 
 ## When You MUST Use the Architecture Loop
 

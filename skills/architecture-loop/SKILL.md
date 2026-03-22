@@ -1,20 +1,22 @@
 ---
 name: architecture-loop
-description: Orchestrates an architecture-enforced implementation feedback loop. Implements code, then runs OO Design and Clean Architecture reviews, iterating until both reviewers approve or the safety valve triggers. Use when implementing code that should meet design quality standards.
+description: Orchestrates an architecture-enforced implementation feedback loop. Implements code, then runs OO Design, Clean Architecture, and API Design reviews, iterating until all reviewers approve or the safety valve triggers. Use when implementing code that should meet design quality standards.
 ---
 
 # Architecture Feedback Loop
 
-You are orchestrating a feedback loop that ensures code meets both
-object-oriented design and clean architecture standards.
+You are orchestrating a feedback loop that ensures code meets object-oriented
+design, clean architecture, and API design standards.
 
 ## Overview
 
-The loop has three agents:
+The loop has four agents:
 1. **Code Implementer** — writes or modifies code
 2. **OO Design Reviewer** — evaluates SOLID, DRY, and GoF pattern usage
 3. **Clean Architecture Reviewer** — evaluates component cohesion, coupling,
    and quality attributes
+4. **API Design Reviewer** — evaluates naming, self-documenting interfaces,
+   type safety, and REST endpoint conventions
 
 The user's request: **$ARGUMENTS**
 
@@ -30,6 +32,7 @@ orchestration:
 - `skills/architecture-loop/implementer-prompt.md`
 - `skills/architecture-loop/oo-design-reviewer-prompt.md`
 - `skills/architecture-loop/clean-architecture-reviewer-prompt.md`
+- `skills/architecture-loop/api-design-reviewer-prompt.md`
 - `skills/architecture-loop/review-output-format.md`
 - `skills/architecture-loop/approval-criteria.md`
 - `skills/oo-design-review/SKILL.md`
@@ -40,6 +43,10 @@ orchestration:
 - `skills/clean-architecture-review/component-cohesion.md`
 - `skills/clean-architecture-review/component-coupling.md`
 - `skills/clean-architecture-review/quality-attributes.md`
+- `skills/api-design-review/SKILL.md`
+- `skills/api-design-review/naming-conventions.md`
+- `skills/api-design-review/method-and-parameter-design.md`
+- `skills/api-design-review/rest-endpoint-design.md`
 
 ### Step 2: Implement (Iteration 1)
 
@@ -76,8 +83,8 @@ Parse the reviewer's output for:
 ### Step 4: Clean Architecture Review
 
 **If the OO review verdict is CHANGES_REQUESTED**, skip this step and
-proceed directly to Step 5. There is no point in running the architecture
-review if OO design issues must be fixed first — the fixes may change the
+proceed directly to Step 6. There is no point in running further reviews
+if OO design issues must be fixed first — the fixes may change the
 architecture.
 
 **If the OO review verdict is APPROVED**, construct the Clean Architecture
@@ -95,13 +102,33 @@ Read-only tool access: Read, Glob, Grep only.
 
 Parse the reviewer's output for verdict and findings.
 
-### Step 5: Evaluate
+### Step 5: API Design Review
 
-Check both review verdicts:
+**If any prior review verdict is CHANGES_REQUESTED**, skip this step and
+proceed directly to Step 6. Fix structural issues before polishing the API
+surface.
 
-**Both APPROVED**: The loop is complete. Proceed to Step 7.
+**If both prior reviews are APPROVED**, construct the API Design reviewer
+prompt by taking `api-design-reviewer-prompt.md` and replacing:
+- `$FILES` with the same file list
+- `$API_DESIGN_REVIEW_SKILL_CONTENT` with the contents of
+  `skills/api-design-review/SKILL.md`, `naming-conventions.md`,
+  `method-and-parameter-design.md`, and `rest-endpoint-design.md`
+- `$REVIEW_OUTPUT_FORMAT` with the contents of `review-output-format.md`
+- `$ITERATION_CONTEXT` with the iteration history
 
-**Either CHANGES_REQUESTED**: Compile a feedback document:
+Spawn the API Design reviewer as a subagent using the Agent tool.
+Read-only tool access: Read, Glob, Grep only.
+
+Parse the reviewer's output for verdict and findings.
+
+### Step 6: Evaluate
+
+Check all review verdicts:
+
+**All APPROVED**: The loop is complete. Proceed to Step 8.
+
+**Any CHANGES_REQUESTED**: Compile a feedback document:
 
 ```
 ## Review Feedback — Iteration [N]
@@ -115,6 +142,11 @@ files, and recommendation]
 files, and recommendation — or "Skipped: OO review must pass first" if
 Step 4 was skipped]
 
+### API Design Findings
+[List each CRITICAL and WARNING finding with ID, description, affected
+files, and recommendation — or "Skipped: prior reviews must pass first"
+if Step 5 was skipped]
+
 ### Previously Addressed
 [List finding IDs that were fixed in prior iterations, to prevent regression]
 
@@ -123,11 +155,11 @@ Step 4 was skipped]
 - Iteration 2: [summary of findings and outcomes]
 ```
 
-Check the safety valve: if this was iteration 3, proceed to Step 6.
+Check the safety valve: if this was iteration 3, proceed to Step 7.
 Otherwise, return to Step 2 with the feedback document replacing
 `$REVIEW_FEEDBACK` in the implementer prompt.
 
-### Step 6: Safety Valve
+### Step 7: Safety Valve
 
 Three iterations have completed. Check remaining findings:
 
@@ -137,10 +169,10 @@ Three iterations have completed. Check remaining findings:
   like to proceed?"
 
 - **If only WARNING or SUGGESTION findings remain**: Auto-approve with
-  caveats. Proceed to Step 7 but note the remaining findings as accepted
+  caveats. Proceed to Step 8 but note the remaining findings as accepted
   trade-offs.
 
-### Step 7: Complete
+### Step 8: Complete
 
 Present the final summary to the user:
 
@@ -155,8 +187,9 @@ Present the final summary to the user:
 
 ## Important Rules
 
-- **Never skip a review.** Even if the code looks good, run both reviewers.
-  The value is in the systematic evaluation, not in catching obvious errors.
+- **Never skip a review.** Even if the code looks good, run all three
+  reviewers. The value is in the systematic evaluation, not in catching
+  obvious errors.
 - **Never modify files during review.** Reviewers are read-only. Only the
   implementer modifies code.
 - **Pass complete context.** Each subagent gets a fresh context window. Do

@@ -33,6 +33,8 @@ parses verdicts and findings to drive the feedback loop.
   `OO-001`, `OO-002`, etc.
 - Clean Architecture findings use prefix `CA-` followed by a three-digit
   number: `CA-001`, `CA-002`, etc.
+- API Design findings use prefix `API-` followed by a three-digit number:
+  `API-001`, `API-002`, etc.
 - Finding IDs must be unique within a review and stable across iterations
   so the orchestrator can track which findings have been addressed.
 
