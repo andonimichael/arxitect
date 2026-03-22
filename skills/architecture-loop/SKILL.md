@@ -8,11 +8,10 @@ description: Orchestrates an architecture-enforced implementation feedback loop.
 You are orchestrating a feedback loop that ensures code meets object-oriented
 design, clean architecture, and API design standards.
 
-The loop has four agents:
-1. **Code Implementer** — writes or modifies code
-2. **Object Oriented Design Reviewer** — evaluates object oriented design principles
-3. **Clean Architecture Reviewer** — evaluates software architecture design principles
-4. **API Design Reviewer** — evaluates API design principles
+The loop alternates between two phases:
+1. **Implement** — a Code Implementer agent writes or modifies code
+2. **Review** — the **arxitect:architecture-review** skill dispatches all
+   three design reviewers and returns a combined report
 
 The user's request: **$ARGUMENTS**
 
@@ -39,66 +38,33 @@ provide:
 
 Collect the implementer's output: files changed and design decisions made.
 
-### Step 3: Object Oriented Design Review
+### Step 3: Architecture Review
 
-Spawn the Object Oriented Design Reviewer agent with **read-only** access
-(Read, Glob, Grep only). Tell it to read
-`skills/oo-design-review/agent-prompt.md` for its instructions and reference
-material, then provide the list of files the implementer created or modified.
+Run the **arxitect:architecture-review** skill on the list of files the
+implementer created or modified. It dispatches all three reviewers (Object
+Oriented Design, Clean Architecture, API Design) and returns a combined
+report with verdicts and structured findings.
 
-Parse the reviewer's output for:
-- `VERDICT: APPROVED` or `VERDICT: CHANGES_REQUESTED`
-- All findings with their IDs and severities
-
-### Step 4: Clean Architecture Review
-
-**If the Object Oriented review verdict is CHANGES_REQUESTED**, skip this step
-and proceed directly to Step 6. There is no point in running further reviews
-if Object Oriented design issues must be fixed first — the fixes may change the
-architecture.
-
-**If the Object Oriented review verdict is APPROVED**, spawn the Clean
-Architecture Reviewer agent with **read-only** access. Tell it to read
-`skills/clean-architecture-review/agent-prompt.md` for its instructions and
-reference material, then provide the same file list.
-
-Parse the reviewer's output for verdict and findings.
-
-### Step 5: API Design Review
-
-**If any prior review verdict is CHANGES_REQUESTED**, skip this step and
-proceed directly to Step 6. Fix structural issues before polishing the API
-surface.
-
-**If both prior reviews are APPROVED**, spawn the API Design Reviewer agent
-with **read-only** access. Tell it to read
-`skills/api-design-review/agent-prompt.md` for its instructions and
-reference material, then provide the same file list
-
-Parse the reviewer's output for verdict and findings.
-
-### Step 6: Evaluate
+### Step 4: Evaluate
 
 Check all review verdicts:
 
-**All APPROVED**: The loop is complete. Proceed to Step 8.
+**All APPROVED**: The loop is complete. Proceed to Step 6.
 
-**Any CHANGES_REQUESTED**: Compile a feedback document:
+**Any CHANGES_REQUESTED**: Compile a feedback document from the combined
+review report:
 
 ```
 ## Review Feedback — Iteration [N]
 
 ### Object Oriented Design Findings
-[List each CRITICAL and WARNING finding with ID, description, affected
-files, and recommendation]
+[CRITICAL and WARNING findings with ID, description, files, recommendation]
 
 ### Clean Architecture Findings
-[List each CRITICAL and WARNING finding — or "Skipped: Object Oriented review
-must pass first" if Step 4 was skipped]
+[CRITICAL and WARNING findings with ID, description, files, recommendation]
 
 ### API Design Findings
-[List each CRITICAL and WARNING finding — or "Skipped: prior reviews must
-pass first" if Step 5 was skipped]
+[CRITICAL and WARNING findings with ID, description, files, recommendation]
 
 ### Previously Addressed
 [Finding IDs fixed in prior iterations, to prevent regression]
@@ -108,11 +74,10 @@ pass first" if Step 5 was skipped]
 - Iteration 2: [summary]
 ```
 
-Check the safety valve: if this was iteration 3, proceed to Step 7.
-Otherwise, return to Step 2 with the feedback document replacing
-`$REVIEW_FEEDBACK` in the implementer prompt.
+Check the safety valve: if this was iteration 3, proceed to Step 5.
+Otherwise, return to Step 2 with the feedback document as review feedback.
 
-### Step 7: Safety Valve
+### Step 5: Safety Valve
 
 Three iterations have completed. Check remaining findings:
 
@@ -122,10 +87,10 @@ Three iterations have completed. Check remaining findings:
   like to proceed?"
 
 - **If only WARNING or SUGGESTION findings remain**: Auto-approve with
-  caveats. Proceed to Step 8 but note the remaining findings as accepted
+  caveats. Proceed to Step 6 but note the remaining findings as accepted
   trade-offs.
 
-### Step 8: Complete
+### Step 6: Complete
 
 Present the final summary to the user:
 
@@ -138,12 +103,25 @@ Present the final summary to the user:
 
 ## Rules
 
-- **Never skip a review.** Even if the code looks good, run all reviewers
-  that are eligible (not short-circuited). The value is in the systematic
-  evaluation.
-- **Never modify files during review.** Reviewers are read-only. Only the
-  implementer modifies code.
-- **Progressive disclosure.** Do not pre-load reviewer reference files into
-  the prompt. Each reviewer agent reads its own skill files.
+- **Never skip a review.** Even if the code looks good, always run the
+  architecture-review skill. The value is in the systematic evaluation.
+- **Never modify files during review.** Only the implementer modifies code.
 - **Track finding IDs.** Use finding IDs to correlate fixes with findings
   and detect regressions across iterations.
+
+## Integration
+
+**Required skills:**
+- **arxitect:architecture-review** — Dispatches all three design reviewers
+
+**Orchestration files (read by this skill):**
+- `skills/architecture-loop/implementer-prompt.md` — Guidelines for the
+  Code Implementer agent
+- `skills/architecture-loop/review-output-format.md` — Structured output
+  format all reviewers must follow
+- `skills/architecture-loop/approval-criteria.md` — Verdict rules and
+  safety valve logic
+
+**Alternative workflow:**
+- **arxitect:architecture-review** — Use for read-only review without the
+  implement-iterate loop

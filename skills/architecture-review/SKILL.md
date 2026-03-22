@@ -42,6 +42,10 @@ to its `agent-prompt.md`. The reviewer reads its own skill files — do
 For each reviewer, tell it to read its `agent-prompt.md` for instructions
 and reference material, then provide the file list to review.
 
+The reason we are delegating these tasks to specialized sub-agents is because
+they operate with isolated context and precise instructions that wll better
+allow them to review the code for their lens.
+
 #### Object Oriented Design Reviewer
 
 Tell the agent to read `skills/oo-design-review/agent-prompt.md`.
@@ -88,3 +92,18 @@ reviewers or compound across domains.]
 - **Preserve finding structure.** The structured finding format enables
   downstream use (e.g., feeding findings into the architecture loop).
   Do not summarize away the detail.
+
+## Integration
+
+**Required skills:**
+- **arxitect:oo-design-review** — Object oriented design reviewer
+- **arxitect:clean-architecture-review** — Clean architecture reviewer
+- **arxitect:api-design-review** — API design reviewer
+
+**Orchestration files (read by this skill):**
+- `skills/architecture-loop/review-output-format.md` — Structured output
+  format all reviewers must follow
+
+**Alternative workflow:**
+- **arxitect:architecture-loop** — Use when you want the implement-iterate
+  feedback loop, not just a read-only review
