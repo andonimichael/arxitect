@@ -23,6 +23,7 @@ Use the `Skill` tool to load these skills when applicable:
 | Skill | When to Use |
 |-------|-------------|
 | `arxitect:architecture-loop` | Implementing code with architecture enforcement. Runs the full implement → review → iterate loop. |
+| `arxitect:architecture-review` | Run all three reviewers in parallel against existing code. No implementation, comprehensive review only. |
 | `arxitect:oo-design-review` | Standalone object oriented design review. No implementation, review only. |
 | `arxitect:clean-architecture-review` | Standalone architecture review. No implementation, review only. |
 | `arxitect:api-design-review` | Standalone API design review. No implementation, review only. |
@@ -38,13 +39,23 @@ apply:
 - The change modifies dependency relationships between components
 - The change touches more than three files
 
-## When to Use Standalone Reviews
+## When to Use the Architecture Review
 
-Invoke the individual review skills when:
+Invoke `arxitect:architecture-review` when:
 
 - Reviewing existing code without making changes
-- The user explicitly asks for a design review
+- The user asks for a comprehensive design review
 - Evaluating code written outside the architecture loop
+
+This runs all three reviewers in parallel and produces a combined report.
+
+## When to Use Individual Standalone Reviews
+
+Invoke the individual review skills (`oo-design-review`,
+`clean-architecture-review`, `api-design-review`) when:
+
+- The user asks for a review of a specific design dimension only
+- You need a quick, targeted evaluation of one concern
 
 ## How to Invoke
 
