@@ -14,19 +14,27 @@ decision the caller must make, and decisions compound cognitive load.
 
 | Parameters | Assessment | Action |
 |------------|------------|--------|
-| 0-2 | Ideal | No action needed |
-| 3 | Acceptable | Ensure each parameter is essential |
-| 4+ | Too many | Introduce a parameter object or builder |
+| 0-3 | Ideal | No action needed |
+| 4-5 | Acceptable | Ensure each parameter is essential |
+| 6+ | Too many | Introduce a parameter object or builder |
 
 **Fixing long parameter lists**:
 
 1. **Parameter object**: Group related parameters into a named object.
    ```
    // Before: 6 parameters, easy to mix up
-   createUser(name, email, role, department, startDate, manager)
+   createUser(title, first_name, last_name, email, phone, country)
 
    // After: intent is clear, order does not matter
-   createUser(UserRegistration(name, email, role, department, startDate, manager))
+   user = User(
+       title=title,
+       first_name=first_name,
+       last_name=last_name,
+       email=email,
+       phone=phone,
+       country=country
+    )
+   createUser(user)
    ```
 
 2. **Builder pattern**: For optional parameters, use a builder that makes
@@ -42,6 +50,19 @@ decision the caller must make, and decisions compound cognitive load.
 3. **Split the method**: If a method needs many parameters, it may be doing
    too much. Consider breaking it into focused methods.
 
+### Order parameters by importance
+
+Place required parameters first, optional parameters last. Place the "main
+subject" of the operation first.
+
+```
+// Good: the thing being operated on comes first
+execute(query, engine, options)
+
+// Bad: options before the main subject
+execute(engine, options, query)
+```
+
 ### Avoid output parameters
 
 Parameters should be inputs. When a method needs to return multiple values,
@@ -55,19 +76,6 @@ validate(order, errors)
 errors = validate(order)
 ```
 
-### Order parameters by importance
-
-Place required parameters first, optional parameters last. Place the "main
-subject" of the operation first.
-
-```
-// Good: the thing being operated on comes first
-sendEmail(recipient, subject, body, options)
-
-// Bad: options before the main subject
-sendEmail(options, recipient, subject, body)
-```
-
 ---
 
 ## Self-Documenting Interfaces
@@ -79,9 +87,8 @@ either obvious from the name or absent entirely.
 
 | Surprising | Unsurprising | Why |
 |------------|--------------|-----|
-| `getUser()` writes to a log | `getUser()` returns a user | "get" implies pure retrieval |
+| `getPhoto()` updates photo view count | `getPhoto()` returns a photo | "get" implies pure retrieval |
 | `validate()` modifies the object | `validate()` returns errors | "validate" implies checking, not changing |
-| `toString()` triggers a database query | `toString()` formats in memory | Conversion should be cheap |
 | `close()` sends a notification | `close()` releases resources | Cleanup should not have business side effects |
 
 ### Make invalid states unrepresentable
@@ -95,15 +102,6 @@ setStatus("actve")  // typo discovered in production
 
 // Good: compiler prevents invalid values
 setStatus(Status.ACTIVE)
-```
-
-```
-// Bad: nothing prevents negative quantity
-createLineItem(product, -5, price)
-
-// Good: type prevents invalid values
-createLineItem(product, Quantity.of(5), price)
-// Quantity.of(-5) throws at construction time
 ```
 
 ### Design for the call site, not the implementation
@@ -137,7 +135,6 @@ transform or unwrap unnecessarily.
 | `void` when a result exists | The result itself | Enable method chaining and assertions |
 | `boolean` for success/failure | Result object or throw exception | Booleans cannot explain what went wrong |
 | `null` for "not found" | `Optional<T>` or empty collection | Forces callers to handle absence explicitly |
-| Raw collection | Immutable collection | Prevents callers from accidentally mutating state |
 
 ### Fail fast and fail loudly
 
@@ -158,69 +155,14 @@ getUser(id): User  // throws UserNotFoundException
 ### Be consistent with collection returns
 
 - Return empty collections, not null, when there are no results
-- Use the most general collection interface as the return type
-  (`List`, not `ArrayList`)
+- Use the most general collection interface that satisfies the business logic
+  invariants as the return type (e.g. `List`, not `ArrayList` or `NavigableSet`
+  not `TreeSet`)
 - Document whether the returned collection is mutable or immutable
 
 ---
 
-## Error Design
-
-### Exception names should describe what went wrong
-
-| Bad | Good |
-|-----|------|
-| `AppException` | `PaymentDeclinedException` |
-| `InvalidDataError` | `InvalidEmailFormatError` |
-| `ProcessingError` | `OrderAlreadyFulfilledException` |
-
-### Include context in error messages
-
-Error messages should answer: what happened, what was expected, and what was
-the actual value?
-
-```
-// Bad
-raise ValueError("Invalid input")
-
-// Good
-raise InvalidEmailError(
-  f"Expected a valid email address but received '{value}': "
-  f"missing '@' symbol"
-)
-```
-
-### Use error hierarchies for catch granularity
-
-Define a base exception for your domain and specific subtypes for each
-failure mode. This allows callers to catch broadly or narrowly as needed.
-
-```
-PaymentError (base)
-├── InsufficientFundsError
-├── PaymentDeclinedError
-├── PaymentGatewayTimeoutError
-└── InvalidPaymentMethodError
-```
-
----
-
 ## Overloading and Default Parameters
-
-### Prefer overloading or defaults to boolean mode switches
-
-Each overload or default should represent a coherent use case, not a
-combination of flags.
-
-```
-// Bad: two booleans create four possible behaviors, most nonsensical
-export(data, includeHeaders: true, compressed: false)
-
-// Good: named variants for each use case
-exportWithHeaders(data)
-exportCompressed(data)
-exportCompressedWithHeaders(data)
-```
 
 ### Telescope constructors toward convenience
 
@@ -236,4 +178,29 @@ HttpClient(baseUrl, HttpClientOptions(
   timeout: Duration.ofSeconds(30),
   retryPolicy: RetryPolicy.exponentialBackoff(maxRetries: 3)
 ))
+```
+
+## Error Design
+
+### Exception names should describe what went wrong
+
+| Bad | Good |
+|-----|------|
+| `AppException` | `PaymentDeclinedException` |
+| `ProcessingError` | `DuplicateOrderException` |
+
+### Include context in error messages
+
+Error messages should answer: what happened, what was expected, and what was
+the actual value?
+
+```
+// Bad
+raise ValueError("Invalid input")
+
+// Good
+raise InvalidEmailError(
+  f"Expected a valid email address but received '{value}': "
+  f"missing '@' symbol"
+)
 ```

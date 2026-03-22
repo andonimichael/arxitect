@@ -11,12 +11,12 @@ definitions — for usability, clarity, and self-documentation.
 
 ## Review Process
 
-1. **Identify the scope.** Read all files specified in $ARGUMENTS. If no files
-   are specified, identify recently changed files via `git diff --name-only`.
+1. **Identify the scope.** Determine the files you are meant to review. Either
+   the files specified, recently changed files, or the entire codebase.
 
 2. **Catalog public interfaces.** Identify all public-facing surfaces: class
    methods, exported functions, REST endpoints, type definitions, and
-   configuration interfaces.
+   configuration interfaces. Do not review internal or private utilities.
 
 3. **Evaluate naming.** Check all names (classes, methods, parameters,
    endpoints) against the naming conventions in `naming-conventions.md`.
@@ -61,6 +61,4 @@ first time:
 - Will they be surprised by the behavior?
 
 The best API is one that requires no documentation because the names and
-types communicate everything. But do not demand perfection in internal
-utilities that have a single caller — reserve the highest standards for
-public interfaces that many consumers will depend on.
+types communicate everything.

@@ -67,8 +67,8 @@ by which consumers need them together.
 
 **Definition**: Classes that change for the same reason and at the same time
 should be grouped together. Classes that change at different times or for
-different reasons should be separated. This is SRP applied at the component
-level.
+different reasons should be separated. This is the Single Responsibility
+Principle applied at the component level.
 
 **Violation indicators**:
 - A single change request requires modifying classes in many different

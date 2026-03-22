@@ -6,13 +6,13 @@ description: Reviews code for object-oriented design quality including SOLID pri
 # OO Design Review
 
 You are performing an object-oriented design review. Evaluate the code against
-four pillars: SOLID principles, DRY, composition and inheritance, and Gang
-of Four design patterns.
+SOLID principles, DRY, composition and inheritance, and Gang of Four design
+patterns.
 
 ## Review Process
 
-1. **Identify the scope.** Read all files specified in $ARGUMENTS. If no files
-   are specified, identify recently changed files via `git diff --name-only`.
+1. **Identify the scope.** Determine the files you are meant to review. Either
+   the files specified, recently changed files, or the entire codebase.
 
 2. **Evaluate SOLID principles.** For each file, check compliance with all five
    SOLID principles. See `solid-principles.md` in this skill directory for
@@ -55,5 +55,5 @@ not need a Strategy pattern. A single implementation does not need an
 interface. Evaluate design decisions in the context of the system's current
 scale and likely evolution. Flag over-engineering as readily as under-engineering.
 
-The goal is code that is easy to understand, change, and test -- not code that
-demonstrates the maximum number of design patterns.
+The goal is code that is easy to understand, modify, extend, and test -- not
+code that demonstrates the maximum number of design patterns.

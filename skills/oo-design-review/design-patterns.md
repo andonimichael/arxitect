@@ -30,7 +30,7 @@ configuration.
 **When to apply**: Exactly one instance must exist system-wide and global
 access is genuinely needed (not just convenient). Logging frameworks and
 configuration registries are common legitimate uses.
-**When to avoid**: Almost always. Singletons hide dependencies, make testing
+**When to avoid**: Singletons can hide dependencies, make testing
 difficult, and introduce global mutable state.
 **Misapplication signal**: Using Singleton to avoid passing dependencies.
 Prefer dependency injection.
@@ -40,6 +40,8 @@ Prefer dependency injection.
 exists that can be cloned and modified.
 **When to avoid**: Object creation is cheap. The clone semantics are unclear
 (deep vs. shallow).
+**Misapplication signal**: Cloning objects that are trivial to construct, or
+cloning when deep-vs-shallow copy semantics cause subtle bugs.
 
 ## Structural Patterns
 
@@ -63,6 +65,8 @@ in the class itself.
 simpler, unified interface would serve most clients.
 **When to avoid**: The subsystem is already simple. Adding a facade just adds
 another layer of indirection.
+**Misapplication signal**: A facade that simply delegates every call to a
+single class without simplifying the interface.
 
 ### Composite
 **When to apply**: Objects form tree structures and clients should treat
@@ -70,11 +74,15 @@ individual objects and compositions uniformly (e.g., file systems, UI
 component trees, expression trees).
 **When to avoid**: The structure is flat. There is no meaningful "part-whole"
 hierarchy.
+**Misapplication signal**: Composite over a flat list where no element
+contains children.
 
 ### Proxy
 **When to apply**: Access control, lazy loading, logging, or remote access
 requires wrapping an object transparently.
 **When to avoid**: The extra indirection provides no benefit.
+**Misapplication signal**: A proxy that adds no access control, caching,
+lazy-loading, or logging — just forwarding every call unchanged.
 
 ## Behavioral Patterns
 
@@ -90,34 +98,46 @@ A simple lambda or function reference suffices for trivial cases.
 notify others, and the publisher should not know about subscribers.
 **When to avoid**: There is exactly one subscriber. Direct method calls are
 simpler and more traceable.
+**Misapplication signal**: Observer with a single hardcoded subscriber that
+never changes.
 
 ### Command
 **When to apply**: Operations must be parameterized, queued, logged, or
 undone. Request handling must be decoupled from request execution.
 **When to avoid**: Simple direct method calls suffice and there is no need
 for undo, queueing, or logging.
+**Misapplication signal**: Command objects that are created, executed
+immediately, and never stored, queued, or undone.
 
 ### Template Method
 **When to apply**: An algorithm's structure is fixed but specific steps vary.
 Subclasses override only the varying steps.
 **When to avoid**: The "template" has only one implementation. Prefer
 composition (Strategy) over inheritance when the variation is complex.
+**Misapplication signal**: A template method with exactly one subclass, or
+one where every step is overridden (no shared skeleton remains).
 
 ### State
 **When to apply**: An object's behavior changes significantly based on its
 internal state, and state-specific logic is scattered across conditionals.
 **When to avoid**: There are only two or three simple states. A boolean or
 enum with a switch is more readable.
+**Misapplication signal**: State pattern for a two-state toggle (on/off,
+enabled/disabled) where a boolean would suffice.
 
 ### Iterator
 **When to apply**: Traversal logic for a collection is complex or multiple
 traversal strategies are needed.
 **When to avoid**: The language's built-in iteration mechanisms suffice.
+**Misapplication signal**: A custom iterator that reimplements what a
+standard for-each loop or stream already provides.
 
 ### Chain of Responsibility
 **When to apply**: Multiple handlers might process a request, and the handler
 is determined at runtime. Middleware pipelines are a common example.
 **When to avoid**: There is a single, known handler.
+**Misapplication signal**: A chain with one handler, or a chain where every
+request is always handled by the same handler.
 
 ## General Guidance
 

@@ -67,7 +67,6 @@ altering the correctness of the program.
   unexpected exception
 - Subclass has empty or no-op implementations of inherited methods
 - Client code checks the concrete type of an object before calling a method
-- Subclass weakens postconditions or strengthens preconditions
 
 **Evaluation approach**:
 1. For each subclass, verify that it honors the contract established by the

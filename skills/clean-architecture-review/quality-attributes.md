@@ -1,8 +1,8 @@
 # Quality Attributes Reference
 
 These quality attributes assess whether the architecture supports the
-practical needs of development teams: the ability to test, extend, and
-maintain the system over time.
+practical needs of the software development lifecycle: the ability to test,
+extend, and maintain the system over time.
 
 ## Testability
 

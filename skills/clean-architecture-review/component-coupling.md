@@ -57,7 +57,7 @@ is hard to change.
 - A widely-used utility component imports from a feature-specific component
 
 **Evaluation approach**:
-1. Calculate or estimate the instability of each component
+1. Estimate the instability of each component
 2. Verify that dependencies flow from unstable toward stable
 3. For any dependency where a stable component depends on a less stable one,
    flag it as a violation

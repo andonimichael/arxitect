@@ -11,8 +11,8 @@ attributes.
 
 ## Review Process
 
-1. **Identify the scope.** Read all files specified in $ARGUMENTS. If no files
-   are specified, identify recently changed files via `git diff --name-only`.
+1. **Identify the scope.** Determine the files you are meant to review. Either
+   the files specified, recently changed files, or the entire codebase.
 
 2. **Map the component structure.** Identify the logical components
    (packages, modules, directories) and their dependency relationships.
