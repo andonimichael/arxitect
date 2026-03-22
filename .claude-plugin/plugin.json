@@ -1,0 +1,16 @@
+{
+  "name": "arxitect",
+  "version": "0.1.0",
+  "description": "Enforces best-practice software design through an agentic feedback loop with OO Design and Clean Architecture reviewers",
+  "author": {
+    "name": "Andoni"
+  },
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "design-patterns",
+    "SOLID",
+    "clean-architecture",
+    "code-review"
+  ]
+}
