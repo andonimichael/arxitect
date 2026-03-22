@@ -1,6 +1,6 @@
 ---
 name: using-arxitect
-description: Bootstrap skill that teaches Claude how to discover and use Arxitect's architecture enforcement skills. Loaded automatically on session start.
+description: Bootstrap skill that teaches how to discover and use Arxitect's architecture enforcement skills. Loaded automatically on session start.
 ---
 
 # Using Arxitect
@@ -11,13 +11,10 @@ collaborate to produce well-designed code:
 
 1. **Code Implementer** — writes code based on requirements and review
    feedback
-2. **OO Design Reviewer** — evaluates SOLID principles, DRY, and Gang of
-   Four design patterns
-3. **Clean Architecture Reviewer** — evaluates component cohesion, coupling
-   principles, and quality attributes (testability, extensibility,
-   maintainability)
-4. **API Design Reviewer** — evaluates naming conventions, self-documenting
-   interfaces, type safety, and REST endpoint design
+2. **Object Oriented Design Reviewer** — evaluates object oriented design principles
+3. **Clean Architecture Reviewer** — evaluates software architecture design
+   principles
+4. **API Design Reviewer** — evaluates API design principles
 
 ## Available Skills
 
@@ -26,9 +23,9 @@ Use the `Skill` tool to load these skills when applicable:
 | Skill | When to Use |
 |-------|-------------|
 | `arxitect:architecture-loop` | Implementing code with architecture enforcement. Runs the full implement → review → iterate loop. |
-| `arxitect:oo-design-review` | Standalone OO design review: SOLID, DRY, GoF patterns. No implementation, review only. |
-| `arxitect:clean-architecture-review` | Standalone architecture review: cohesion, coupling, quality attributes. No implementation, review only. |
-| `arxitect:api-design-review` | Standalone API design review: naming, signatures, types, REST conventions. No implementation, review only. |
+| `arxitect:oo-design-review` | Standalone object oriented design review. No implementation, review only. |
+| `arxitect:clean-architecture-review` | Standalone architecture review. No implementation, review only. |
+| `arxitect:api-design-review` | Standalone API design review. No implementation, review only. |
 
 ## When You MUST Use the Architecture Loop
 

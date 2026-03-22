@@ -22,18 +22,16 @@ A reviewer issues CHANGES_REQUESTED when:
 For borderline cases with one or two WARNING findings, reviewers lean toward
 APPROVED when:
 - The warnings represent deliberate trade-offs documented in the code
-- The warnings exist in code that is scheduled for imminent replacement
 - Fixing the warnings would require changes disproportionate to the benefit
 
 Reviewers lean toward CHANGES_REQUESTED when:
 - The warnings interact with each other to create a compound risk
-- The warnings are in code that will be depended on by future features
 - The fix is straightforward and proportionate
 
 ## Safety Valve
 
 The feedback loop runs a maximum of **3 full iterations**. One iteration
-consists of: implementation (or re-implementation) followed by both reviews.
+consists of: implementation (or re-implementation) followed by reviews.
 
 After 3 iterations:
 - If CRITICAL findings remain: **stop and present remaining issues to the

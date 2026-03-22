@@ -1,9 +1,9 @@
 ---
 name: oo-design-review
-description: Reviews code for object-oriented design quality including SOLID principles, DRY violations, composition and inheritance choices, and Gang of Four design pattern applicability. Use when evaluating OO design of new or modified code.
+description: Reviews code for object-oriented design quality including SOLID principles, DRY violations, composition and inheritance choices, and Gang of Four design pattern applicability. Use when evaluating object oriented design of new or modified code.
 ---
 
-# OO Design Review
+# Objet Oriented Design Review
 
 You are performing an object-oriented design review. Evaluate the code against
 SOLID principles, DRY, composition and inheritance, and Gang of Four design

@@ -1,6 +1,6 @@
 ---
 name: architecture-loop
-description: Orchestrates an architecture-enforced implementation feedback loop. Implements code, then runs OO Design, Clean Architecture, and API Design reviews, iterating until all reviewers approve or the safety valve triggers. Use when implementing code that should meet design quality standards.
+description: Orchestrates an architecture-enforced implementation feedback loop. Implements code, then runs Object Oriented Design, Clean Architecture, and API Design reviews, iterating until all reviewers approve or the safety valve triggers. Use when implementing code that should meet design quality standards.
 ---
 
 # Architecture Feedback Loop
@@ -12,11 +12,9 @@ design, clean architecture, and API design standards.
 
 The loop has four agents:
 1. **Code Implementer** — writes or modifies code
-2. **OO Design Reviewer** — evaluates SOLID, DRY, and GoF pattern usage
-3. **Clean Architecture Reviewer** — evaluates component cohesion, coupling,
-   and quality attributes
-4. **API Design Reviewer** — evaluates naming, self-documenting interfaces,
-   type safety, and REST endpoint conventions
+2. **Object Oriented Design Reviewer** — evaluates object oriented design principles
+3. **Clean Architecture Reviewer** — evaluates software architecture design principles
+4. **API Design Reviewer** — evaluates API design principles
 
 The user's request: **$ARGUMENTS**
 
@@ -36,18 +34,8 @@ orchestration:
 - `skills/architecture-loop/review-output-format.md`
 - `skills/architecture-loop/approval-criteria.md`
 - `skills/oo-design-review/SKILL.md`
-- `skills/oo-design-review/solid-principles.md`
-- `skills/oo-design-review/composition-and-inheritance.md`
-- `skills/oo-design-review/design-patterns.md`
-- `skills/oo-design-review/dry-principle.md`
 - `skills/clean-architecture-review/SKILL.md`
-- `skills/clean-architecture-review/component-cohesion.md`
-- `skills/clean-architecture-review/component-coupling.md`
-- `skills/clean-architecture-review/quality-attributes.md`
 - `skills/api-design-review/SKILL.md`
-- `skills/api-design-review/naming-conventions.md`
-- `skills/api-design-review/method-and-parameter-design.md`
-- `skills/api-design-review/rest-endpoint-design.md`
 
 ### Step 2: Implement (Iteration 1)
 
@@ -63,9 +51,9 @@ has full tool access (Read, Write, Edit, Bash, Glob, Grep).
 Collect the implementer's output: the list of files changed and design
 decisions made.
 
-### Step 3: OO Design Review
+### Step 3: Object Oriented Design Review
 
-Construct the OO reviewer prompt by taking `oo-design-reviewer-prompt.md`
+Construct the Object Oriented reviewer prompt by taking `oo-design-reviewer-prompt.md`
 and replacing:
 - `$FILES` with the list of files the implementer created or modified
 - `$OO_REVIEW_SKILL_CONTENT` with the contents of `skills/oo-design-review/SKILL.md`,
