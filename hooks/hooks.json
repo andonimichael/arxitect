@@ -1,14 +1,14 @@
 {
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$PLUGIN_DIR/hooks/session-start"
-          }
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "$PLUGIN_DIR/hooks/session-start"
+                    }
+                ]
+            }
         ]
-      }
-    ]
-  }
+    }
 }

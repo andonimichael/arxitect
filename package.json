@@ -1,15 +1,7 @@
 {
-  "name": "arxitect",
-  "version": "0.1.0",
-  "type": "module",
-  "description": "A Claude Code plugin that enforces best-practice software design through an agentic architecture feedback loop",
-  "license": "MIT",
-  "keywords": [
-    "architecture",
-    "design-patterns",
-    "SOLID",
-    "clean-architecture",
-    "code-review",
-    "claude-code-plugin"
-  ]
+    "name": "arxitect",
+    "version": "0.1.0",
+    "type": "module",
+    "description": "Enforces best-practice software design through an agentic feedback loop with Object Oriented Design, Clean Architecture, and API Design reviewers",
+    "license": "MIT"
 }
