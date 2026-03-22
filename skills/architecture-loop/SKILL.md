@@ -37,6 +37,7 @@ orchestration:
 - `skills/architecture-loop/approval-criteria.md`
 - `skills/oo-design-review/SKILL.md`
 - `skills/oo-design-review/solid-principles.md`
+- `skills/oo-design-review/composition-and-inheritance.md`
 - `skills/oo-design-review/design-patterns.md`
 - `skills/oo-design-review/dry-principle.md`
 - `skills/clean-architecture-review/SKILL.md`
@@ -68,7 +69,8 @@ Construct the OO reviewer prompt by taking `oo-design-reviewer-prompt.md`
 and replacing:
 - `$FILES` with the list of files the implementer created or modified
 - `$OO_REVIEW_SKILL_CONTENT` with the contents of `skills/oo-design-review/SKILL.md`,
-  `solid-principles.md`, `design-patterns.md`, and `dry-principle.md`
+  `solid-principles.md`, `composition-and-inheritance.md`,
+  `design-patterns.md`, and `dry-principle.md`
 - `$REVIEW_OUTPUT_FORMAT` with the contents of `review-output-format.md`
 - `$ITERATION_CONTEXT` with "Iteration 1. No prior review history." (or the
   accumulated history for later iterations)

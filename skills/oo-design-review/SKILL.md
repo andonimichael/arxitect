@@ -1,12 +1,13 @@
 ---
 name: oo-design-review
-description: Reviews code for object-oriented design quality including SOLID principles, DRY violations, and Gang of Four design pattern applicability. Use when evaluating OO design of new or modified code.
+description: Reviews code for object-oriented design quality including SOLID principles, DRY violations, composition and inheritance choices, and Gang of Four design pattern applicability. Use when evaluating OO design of new or modified code.
 ---
 
 # OO Design Review
 
 You are performing an object-oriented design review. Evaluate the code against
-three pillars: SOLID principles, DRY, and Gang of Four design patterns.
+four pillars: SOLID principles, DRY, composition and inheritance, and Gang
+of Four design patterns.
 
 ## Review Process
 
@@ -21,12 +22,18 @@ three pillars: SOLID principles, DRY, and Gang of Four design patterns.
    conditionals, and copy-pasted structures. See `dry-principle.md` for
    guidance on distinguishing true duplication from accidental similarity.
 
-4. **Assess design pattern applicability.** Identify places where a Gang of
+4. **Evaluate composition and inheritance usage.** Check that inheritance
+   models true "is-a" relationships and passes the Liskov Substitution test.
+   Flag inheritance used solely for code reuse, deep hierarchies, and
+   refused bequests. See `composition-and-inheritance.md` for the decision
+   framework and common misapplications.
+
+5. **Assess design pattern applicability.** Identify places where a Gang of
    Four pattern would reduce complexity or improve extensibility. Also flag
    misapplied patterns that add unnecessary abstraction. See
    `design-patterns.md` for the pattern catalog and applicability heuristics.
 
-5. **Produce structured output.** Follow the review output format defined in
+6. **Produce structured output.** Follow the review output format defined in
    `skills/architecture-loop/review-output-format.md`. Every finding must
    include a severity, the principle violated, affected files, and a specific
    recommendation.
