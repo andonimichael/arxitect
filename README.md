@@ -42,11 +42,13 @@ Then install the plugin:
 
 ### Cursor
 
-Tell Codex:
+Clone the repository into Cursor's local plugin directory:
 
+```bash
+git clone https://github.com/andonimichael/arxitect.git ~/.cursor/plugins/local/arxitect
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/andonimichael/arxitect/refs/heads/main/.cursor/INSTALL.md
-```
+
+Then restart Cursor or run **Developer: Reload Window**.
 
 ### Codex
 
