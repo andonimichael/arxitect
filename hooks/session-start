@@ -1,27 +1,50 @@
 #!/usr/bin/env bash
-#
-# SessionStart hook for Arxitect.
-# Reads the using-arxitect skill and injects it into the session context.
+# SessionStart hook for Arxitect plugin
+# Modified from https://github.com/obra/superpowers/blob/main/hooks/session-start
 
 set -euo pipefail
 
+# Determine plugin root directory
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-PLUGIN_DIR="$(dirname "$SCRIPT_DIR")"
-SKILL_FILE="$PLUGIN_DIR/skills/using-arxitect/SKILL.md"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-if [ ! -f "$SKILL_FILE" ]; then
-  exit 0
+# Read using-arxitect content
+skill_content=$(cat "${PLUGIN_ROOT}/skills/using-arxitect/SKILL.md" 2>&1 || echo "Error reading using-arxitect skill")
+
+# Escape string for JSON embedding using bash parameter substitution.
+# Each ${s//old/new} is a single C-level pass — orders of magnitude
+# faster than shelling out to python3.
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+skill_escaped=$(escape_for_json "$skill_content")
+session_context="<EXTREMELY_IMPORTANT>\nYou are a software architecture expert.\n\n**Below is the full content of your 'arxitect:using-arxitect' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${skill_escaped}\n</EXTREMELY_IMPORTANT>"
+
+# Output context injection as JSON.
+# Cursor hooks expect additional_context.
+# Claude Code hooks expect hookSpecificOutput.additionalContext.
+# Claude Code reads BOTH fields without deduplication, so we must only
+# emit the field consumed by the current platform to avoid double injection.
+#
+# Uses printf instead of heredoc (cat <<EOF) to work around a bash 5.3+
+# bug where heredoc variable expansion hangs when content exceeds ~512 bytes.
+# See: https://github.com/obra/superpowers/issues/571
+if [ -n "${CURSOR_PLUGIN_ROOT:-}" ]; then
+  # Cursor sets CURSOR_PLUGIN_ROOT (may also set CLAUDE_PLUGIN_ROOT) — emit additional_context
+  printf '{\n  "additional_context": "%s"\n}\n' "$session_context"
+elif [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+  # Claude Code sets CLAUDE_PLUGIN_ROOT — emit only hookSpecificOutput
+  printf '{\n  "hookSpecificOutput": {\n    "hookEventName": "SessionStart",\n    "additionalContext": "%s"\n  }\n}\n' "$session_context"
+else
+  # Other platforms — emit additional_context as fallback
+  printf '{\n  "additional_context": "%s"\n}\n' "$session_context"
 fi
 
-SKILL_CONTENT=$(cat "$SKILL_FILE")
-
-# JSON-escape the content
-ESCAPED=$(printf '%s' "$SKILL_CONTENT" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
-
-cat <<HOOK_EOF
-{
-  "hookSpecificOutput": {
-    "additionalContext": "<ARXITECT>\n${ESCAPED:1:${#ESCAPED}-2}\n</ARXITECT>"
-  }
-}
-HOOK_EOF
+exit 0

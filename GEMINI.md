@@ -1,9 +1,4 @@
----
-name: using-arxitect
-description: Bootstrap skill that teaches how to discover and use Arxitect's architecture enforcement skills. Loaded automatically on session start.
----
-
-# Using Arxitect
+# Arxitect
 
 You have Arxitect loaded. Arxitect enforces best-practice software design
 principles through an agentic architecture feedback loop. Four agents
@@ -18,7 +13,7 @@ collaborate to produce well-designed code:
 
 ## Available Skills
 
-Use the `Skill` tool to load these skills when applicable:
+Use skills when applicable:
 
 | Skill | When to Use |
 |-------|-------------|
@@ -39,7 +34,7 @@ apply:
 - The change modifies dependency relationships between components
 - The change affects several files across module boundaries
 
-## When to Use the Architecture Review
+## When to use the Architecture Review
 
 Invoke `arxitect:architecture-review` when:
 
@@ -60,11 +55,6 @@ Invoke the individual review skills (`oo-design-review`,
 - You need a quick, targeted evaluation of one concern
 
 ## How to Invoke
-
-```
-Skill: arxitect:architecture-loop
-Args: <the user's implementation request>
-```
 
 Always load the full skill before taking action. Never attempt to replicate
 skill behavior from memory alone. The skills contain detailed reference
