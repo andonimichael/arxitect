@@ -1,0 +1,34 @@
+{
+    "name": "arxitect-marketplace",
+    "description": "Arxitect Marketplace - The best practice software architecture skills library",
+    "owner": {
+        "name": "Andoni Michael Garcia",
+        "email": "andoni.m.garcia@gmail.com"
+    },
+    "plugins": [
+        {
+            "name": "arxitect",
+            "description": "Enforces best-practice software design through an agentic feedback loop with Object Oriented Design, Clean Architecture, and API Design reviewers",
+            "version": "0.1.0",
+            "source": "./",
+            "author": {
+                "name": "Andoni Michael Garcia",
+                "email": "andoni.m.garcia@gmail.com"
+            },
+            "homepage": "https://github.com/andonimichael/arxitect",
+            "repository": "https://github.com/andonimichael/arxitect",
+            "license": "MIT",
+            "keywords": [
+                "software-design",
+                "software-architecture",
+                "best-practice",
+                "solid",
+                "solid-principles",
+                "design-patterns",
+                "object-oriented-design",
+                "clean-architecture",
+                "api-design"
+            ]
+        }
+    ]
+}
