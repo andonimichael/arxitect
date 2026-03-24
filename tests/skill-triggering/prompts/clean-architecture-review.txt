@@ -1,0 +1,1 @@
+I need a clean architecture review of this project. Evaluate the component coupling and cohesion, check for dependency cycles, and identify any layer violations.

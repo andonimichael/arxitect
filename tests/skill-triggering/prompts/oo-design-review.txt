@@ -1,0 +1,1 @@
+I want an object-oriented design review of the codebase. Check for SOLID violations, inheritance misuse, and DRY problems.

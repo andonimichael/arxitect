@@ -1,0 +1,1 @@
+Implement a new UserService module with authentication and authorization. Make sure the design follows clean architecture and SOLID principles.

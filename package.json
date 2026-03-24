@@ -3,5 +3,12 @@
     "version": "0.1.0",
     "type": "module",
     "description": "Enforces best-practice software design through an agentic feedback loop with Object Oriented Design, Clean Architecture, and API Design reviewers",
-    "license": "MIT"
+    "license": "MIT",
+    "scripts": {
+        "test": "./tests/run-tests.sh",
+        "test:behavioral": "./tests/run-tests.sh --behavioral",
+        "test:triggering": "./tests/run-tests.sh --triggering",
+        "test:explicit": "./tests/run-tests.sh --explicit",
+        "test:all": "./tests/run-tests.sh --all"
+    }
 }

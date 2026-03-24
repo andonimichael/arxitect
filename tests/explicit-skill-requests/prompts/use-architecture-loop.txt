@@ -1,0 +1,1 @@
+Use the architecture-loop skill to implement a payment processing module.

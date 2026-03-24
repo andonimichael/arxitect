@@ -1,0 +1,22 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make test scripts executable
+        run: chmod +x tests/*.sh tests/static/*.sh tests/claude-code/*.sh tests/skill-triggering/*.sh tests/explicit-skill-requests/*.sh hooks/session-start
+
+      - name: Run static tests
+        run: ./tests/run-tests.sh

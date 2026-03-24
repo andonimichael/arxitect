@@ -1,0 +1,1 @@
+Review the architecture of the src/ directory. Check for SOLID violations, dependency issues, and API design problems.

@@ -1,5 +1,7 @@
 # Arxitect
 
+[![CI](https://github.com/andonimichael/arxitect/actions/workflows/ci.yml/badge.svg)](https://github.com/andonimichael/arxitect/actions/workflows/ci.yml)
+
 Arxitect is an agentic coding plugin that enforces best-practice software design principles. It adds architecture reviewers to your coding agent that automatically evaluate your code against Object-Oriented Design, Clean Architecture, and API Design standards.
 
 ## Background
