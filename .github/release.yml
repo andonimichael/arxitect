@@ -1,0 +1,8 @@
+changelog:
+  categories:
+    - title: "Commits"
+      labels:
+        - "*"
+  exclude:
+    labels:
+      - skip-changelog

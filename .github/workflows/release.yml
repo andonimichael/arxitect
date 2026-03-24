@@ -1,0 +1,88 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: "Version Scope"
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+        default: patch
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Bump Version, Tag & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Release new version
+        id: release
+        run: |
+          chmod +x scripts/release.sh
+          ./scripts/release.sh ${{ inputs.scope }}
+
+      - name: Commit release
+        run: |
+          git add \
+            package.json \
+            .claude-plugin/plugin.json \
+            .claude-plugin/marketplace.json \
+            .cursor-plugin/plugin.json \
+            gemini-extension.json
+          git commit -m "$(cat <<EOF
+          Release Version: ${{ steps.release.outputs.new_version }}
+
+          Release Scope: ${{ inputs.scope }}
+          Previous Version: ${{ steps.release.outputs.old_version }}
+          EOF
+          )"
+
+      - name: Create and push tag
+        run: |
+          TAG="v${{ steps.release.outputs.new_version }}"
+          git tag -a "$TAG" -m "Release ${TAG}"
+          git push origin main "$TAG"
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="v${{ steps.release.outputs.new_version }}"
+          PREV_TAG=$(git tag --sort=-v:refname | grep -E '^v[0-9]' | sed -n '2p' || true)
+
+          NOTES_ARGS=(
+            --title "${TAG}"
+            --tag "${TAG}"
+            --generate-notes
+          )
+
+          # If there's a previous tag, use it as the base for release notes
+          if [[ -n "$PREV_TAG" ]]; then
+            NOTES_ARGS+=(--notes-start-tag "$PREV_TAG")
+          fi
+
+          # Mark pre-1.0 releases as prerelease
+          VERSION="${{ steps.release.outputs.new_version }}"
+          MAJOR="${VERSION%%.*}"
+          if [[ "$MAJOR" == "0" ]]; then
+            NOTES_ARGS+=(--prerelease)
+          fi
+
+          gh release create "${NOTES_ARGS[@]}"
