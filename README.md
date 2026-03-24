@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/andonimichael/arxitect/actions/workflows/ci.yml/badge.svg)](https://github.com/andonimichael/arxitect/actions/workflows/ci.yml)
 
-Arxitect is an agentic coding plugin that enforces best-practice software design principles. It adds architecture reviewers to your coding agent that automatically evaluate your code against Object-Oriented Design, Clean Architecture, and API Design standards.
+Arxitect is an agentic coding plugin that enforces best-practice software design & architecture. It adds implementation agents and architecture reviewers to your client that enforce API Design, Object-Oriented Design, and Clean Architecture standards.
 
 ## Background
 
@@ -14,19 +14,27 @@ Software design principles weren't established specifically to help humans. They
 
 ## How it works
 
-When you ask your coding agent to implement something, Arxitect provides skills that review the result against established design principles. Three specialized reviewers examine your code from different angles:
+When you ask your coding agent to implement something, Arxitect provides sub-agents and skills that can implement the change or review the result against established design principles. Three specialized reviewers examine your code from different angles:
 
 - An **API Design Reviewer** assesses naming conventions, method signatures, parameter design, type safety, and REST endpoint design.
 - An **Object Oriented Design Reviewer** checks SOLID principles, DRY violations, composition vs. inheritance choices, and design pattern applicability.
 - A **Clean Architecture Reviewer** evaluates component cohesion (REP, CRP, CCP), component coupling (ADP, SDP, SAP), and quality attributes like maintainability and testability.
 
-You can run reviewers individually, run all three at once, or use the **architecture loop** — an automated feedback cycle that implements code, runs all reviewers, fixes findings, and iterates until every reviewer approves or a safety valve triggers (3 iterations max).
+## What it contains
 
-Because each reviewer runs as a parallel subagent with its own reference material, reviews are fast and focused. Findings use a structured format with severity levels, so critical issues block progress while minor suggestions don't slow you down.
+Arxitect contains the following agents:
+  - `@architecture-loop` that will plan and implement your change using best practices.
+  - `@architecture-review` that will review your code for adherence to best practices.
+
+And it contains the following skills:
+  - `/architecture-loop` that will plan and implement your change using best practices.
+  - `/architecture-review` that will review your code for adherence to best practices.
+  - `/api-design-review` that will audit your code for adherence to api design principles.
+  - `/oo-design-review` that will audit your code for adherence to object oriented design principles.
+  - `/clean-architecture-review` that will audit your code for adherence to clean architecture principles.
+  - `/using-arxitect` the bootstrap skill that teaches your client how and when to use Arxitect
 
 ## Installation
-
-**Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin support. Codex requires manual setup.
 
 ### Claude Code (via Plugin Marketplace)
 
@@ -76,21 +84,4 @@ gemini extensions install https://github.com/andonimichael/arxitect
 
 ### Verify Installation
 
-Start a new session and ask your agent to review your code's architecture. It should automatically invoke the relevant Arxitect skill.
-
-## Skills
-
-### Reviews
-
-- **architecture-review** — Runs all three reviewers (Object Oriented Design, Clean Architecture, API Design) in parallel against your code.
-- **oo-design-review** — Reviews SOLID principles, DRY, composition and inheritance choices, and Gang of Four design pattern applicability.
-- **clean-architecture-review** — Reviews component cohesion, component coupling, and quality attributes (maintainability, extensibility, testability).
-- **api-design-review** — Reviews naming conventions, self-documenting interfaces, method and parameter design, type safety, and REST endpoint design.
-
-### Workflow
-
-- **architecture-loop** — Implements code, then runs all three architecture reviews in a feedback loop, iterating until all reviewers approve or the safety valve triggers.
-
-### Meta
-
-- **using-arxitect** — Introduction to the skills system. Loaded automatically on session start.
+Ask your client about Arxitect or ask your agent to review your code's architecture. It should automatically invoke the relevant Arxitect skill.

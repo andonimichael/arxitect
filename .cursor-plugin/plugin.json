@@ -2,7 +2,7 @@
     "name": "arxitect",
     "displayName": "Arxitect",
     "version": "0.1.0",
-    "description": "Enforces best-practice software design through an agentic feedback loop with Object Oriented Design, Clean Architecture, and API Design reviewers",
+    "description": "Enforces best-practice software design & architecture",
     "author": {
         "name": "Andoni Michael Garcia",
         "email": "andoni.m.garcia@gmail.com"

@@ -1,13 +1,21 @@
 # Arxitect
 
 Arxitect is an agentic coding plugin that enforces best-practice software
-design principles through an agentic architecture feedback loop.
+design & architecture. It contains skills for auditing your code for API
+design, object oriented design, and clean architecture. Additionally, it
+contains implementation and code review agents.
 
 ## Project Structure
 
 - `.claude-plugin/` - Plugin manifest for Claude Code registration
+- `.codex/` - Installation instructions for ChatGPT Codex
+- `.cursor/` - Installation instructions for Cursor
+- `.cursor-plugin/` - Plugin manifest for Cursor registration
+- `agents/` - The architecture-loop and architecture-review agents
 - `hooks/` - Session lifecycle hooks (bootstrap injection)
+- `scripts/` - The release script
 - `skills/` - Core skills, each in its own directory with a `SKILL.md`
+- `tests/` - Static and dynamic tests
 
 ## Development Guidelines
 

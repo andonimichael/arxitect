@@ -1,7 +1,7 @@
 # Arxitect
 
 You have Arxitect loaded. Arxitect enforces best-practice software design
-principles through an agentic architecture feedback loop. Four agents
+and architecture principles through an agentic implementation loop. Four agents
 collaborate to produce well-designed code:
 
 1. **Code Implementer** — writes code based on requirements and review
