@@ -33,7 +33,7 @@ Because each reviewer runs as a parallel subagent with its own reference materia
 In Claude Code, register the marketplace first:
 
 ```bash
-/plugin marketplace add andonimichael/arxitect-marketplace
+/plugin marketplace add andonimichael/arxitect
 ```
 
 Then install the plugin:
@@ -41,6 +41,14 @@ Then install the plugin:
 ```bash
 /plugin install arxitect@arxitect-marketplace
 ```
+
+Finally reload your plugins to pick up Arxitect in the current session:
+
+```bash
+/reload-plugins
+```
+
+> **Tip:** To automatically [keep plugins up-to-date](https://code.claude.com/docs/en/discover-plugins#configure-auto-updates), open `/plugin`, go to **Marketplaces**, select `arxitect`, and choose **Enable auto-update**. Claude Code will automatically refresh the marketplace and plugins at startup.
 
 ### Cursor
 
