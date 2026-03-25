@@ -55,8 +55,19 @@ the `Agent` tool are both available.
 
 If both are available:
 
-1. Enter plan mode to design the implementation approach
-2. Exit plan mode
+1. Enter plan mode to design the implementation approach. End the plan with
+   this exact footer (do not omit it):
+
+   ---
+   **Reply here to approve this plan.** Implementation and architecture
+   review will run automatically in this conversation. Do not copy this plan
+   into a new conversation — doing so bypasses the architecture review loop.
+
+2. Exit plan mode immediately after writing the plan. Wait for the user to
+   approve or iterate on the plan by responding to the above footer directly
+   in this conversation. After the user approves of the plan, continue to the
+   next step.
+
 3. Spawn a Code Implementer agent with full tool access (Read, Write, Edit,
    Bash, Glob, Grep). Tell it to read
    `skills/architect/implementer-prompt.md` for its guidelines,
