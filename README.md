@@ -75,11 +75,19 @@ Then restart Cursor or run **Developer: Reload Window**.
 
 ### Codex
 
-Tell Codex:
+Clone the repository into Codex:
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/andonimichael/arxitect/refs/heads/main/.codex/INSTALL.md
+git clone https://github.com/andonimichael/arxitect.git ~/.codex/arxitect
 ```
+
+Then symlink the skills into Codex's agent skills directory:
+
+```
+ln -s ~/.codex/arxitect/skills ~/.agents/skills/arxitect
+```
+
+Finally, restart Codex to pick up the new skills.
 
 ### Gemini CLI
 
