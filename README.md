@@ -55,7 +55,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin:
 
 ```bash
-/plugin install arxitect@arxitect-marketplace
+/plugin install arxitect@arxitect
 ```
 
 Finally reload your plugins to pick up Arxitect in the current session:
