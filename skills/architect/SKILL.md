@@ -56,13 +56,10 @@ If it is available:
 
 1. Read the relevant files yourself, then write a concise implementation plan
    as a regular chat message — **do not use `EnterPlanMode`**. Format it with
-   markdown headings: Overview, Changes, Tests, and Verification steps.
-2. End the message with: "Reply to approve or suggest changes."
-3. Wait for the user's reply. Iterate on the plan if they have comments.
-4. Once the user approves, fork a Code Implementer agent with full tool
-   access (Read, Write, Edit, Bash, Glob, Grep). Tell it to read
-   `skills/architect/implementer-prompt.md` for its guidelines,
-   then provide:
+   markdown headings: Overview, Changes, Testing, and Verification steps.
+2. Fork a Code Implementer agent with full tool access (Read, Write, Edit, Bash,
+   Glob, Grep). Tell it to read `skills/architect/implementer-prompt.md` for its
+   guidelines, then provide:
    - The user's task description
    - The plan produced above
    - Any review feedback from prior iterations
