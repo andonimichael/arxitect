@@ -8,7 +8,6 @@ Arxitect is an agentic coding plugin that enforces best-practice software design
   <img src="assets/images/claude_code_skill_triggering.png" alt="Screenshot: Claude Code skill triggering" width="400"/>
 </p>
 
-
 ## Background
 
 Arxitect was influenced by the design of [Superpowers](https://github.com/obra/superpowers). Arxitect extends Superpower's concept of improving agents at implementing coding tasks to improving agents at broader code architecture and software design.
@@ -19,11 +18,15 @@ Software design principles weren't established specifically to help humans. They
 
 ## How it works
 
-When you ask your coding agent to implement something, Arxitect provides sub-agents and skills that can implement the change or review the result against established design principles. Three specialized reviewers examine your code from different angles:
+Arxitect provides sub-agents and skills that can implement features and review code against established design principles. These will automatically trigger when the Client determines architecture review is important for the requested changes or are relevant for the input prompt. Three specialized reviewers will examine your code from different angles:
 
 - An **API Design Reviewer** assesses naming conventions, method signatures, parameter design, type safety, and REST endpoint design.
 - An **Object Oriented Design Reviewer** checks SOLID principles, DRY violations, composition vs. inheritance choices, and design pattern applicability.
 - A **Clean Architecture Reviewer** evaluates component cohesion (REP, CRP, CCP), component coupling (ADP, SDP, SAP), and quality attributes like maintainability and testability.
+
+<p align="center">
+  <img src="assets/images/claude_code_oo_design_review.png" alt="Screenshot: Claude Code OO design review" width="600"/>
+</p>
 
 ## What it contains
 
