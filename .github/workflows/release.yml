@@ -70,7 +70,6 @@ jobs:
 
           NOTES_ARGS=(
             --title "${TAG}"
-            --tag "${TAG}"
             --generate-notes
           )
 
@@ -86,4 +85,4 @@ jobs:
             NOTES_ARGS+=(--prerelease)
           fi
 
-          gh release create "${NOTES_ARGS[@]}"
+          gh release create "${TAG}" "${NOTES_ARGS[@]}"
