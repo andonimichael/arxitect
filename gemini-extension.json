@@ -1,6 +1,6 @@
 {
     "name": "arxitect",
     "description": "Enforces best-practice software design & architecture",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "contextFileName": "GEMINI.md"
 }
