@@ -48,25 +48,19 @@ If superpowers is available, use its planning and execution workflow:
 4. Provide the user's task description and any review feedback from prior
    iterations
 
-#### Strategy B: Native Plan + Agent
+#### Strategy B: Native Agent
 
-If superpowers is not installed, check whether the `EnterPlanMode` tool and
-the `Agent` tool are both available.
+If superpowers is not installed, check whether the `Agent` tool is available.
 
-If both are available:
+If it is available:
 
-1. Call `EnterPlanMode` to plan the implementation approach.
-2. Afterwards, call `ExitPlanMode` to return to the main conversation.
-3. Then, in a regular chat message (not inside the plan), send the user this
-   prompt:
-
-   > The plan is ready. **Reply here to iterate on or approve it.**
-   > Once approved, implementation and architecture review will run
-   > automatically.
-
-4. If the user has comments, iterate on the plan.
-5. Once the user approves the plan, spawn a Code Implementer agent with full
-   tool access (Read, Write, Edit, Bash, Glob, Grep). Tell it to read
+1. Read the relevant files yourself, then write a concise implementation plan
+   as a regular chat message — **do not use `EnterPlanMode`**. Format it with
+   markdown headings: Overview, Changes, Tests, and Verification steps.
+2. End the message with: "Reply to approve or suggest changes."
+3. Wait for the user's reply. Iterate on the plan if they have comments.
+4. Once the user approves, fork a Code Implementer agent with full tool
+   access (Read, Write, Edit, Bash, Glob, Grep). Tell it to read
    `skills/architect/implementer-prompt.md` for its guidelines,
    then provide:
    - The user's task description
