@@ -25,7 +25,7 @@ echo ""
 
 SKILLS=(
   "architecture-review"
-  "architecture-loop"
+  "architect"
   "oo-design-review"
   "clean-architecture-review"
   "api-design-review"

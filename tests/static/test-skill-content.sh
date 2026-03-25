@@ -10,7 +10,7 @@ SKILLS_DIR="${PROJECT_ROOT}/skills"
 
 begin_suite "Review Output Format and Finding ID Prefixes"
 
-OUTPUT_FORMAT="${SKILLS_DIR}/architecture-loop/review-output-format.md"
+OUTPUT_FORMAT="${SKILLS_DIR}/architect/review-output-format.md"
 
 assert_file_contains "$OUTPUT_FORMAT" "OO-" "Output format documents OO- prefix"
 assert_file_contains "$OUTPUT_FORMAT" "CA-" "Output format documents CA- prefix"
@@ -49,22 +49,22 @@ assert_file_contains "$REVIEW_SKILL" "clean-architecture-review" \
 assert_file_contains "$REVIEW_SKILL" "api-design-review" \
   "architecture-review references api-design-review"
 
-# ── Architecture loop references architecture-review ─────────────────────────
+# ── Architect references architecture-review ─────────────────────────────────
 
-begin_suite "Architecture Loop Cross-References"
+begin_suite "Architect Cross-References"
 
-LOOP_SKILL="${SKILLS_DIR}/architecture-loop/SKILL.md"
+LOOP_SKILL="${SKILLS_DIR}/architect/SKILL.md"
 
 assert_file_contains "$LOOP_SKILL" "architecture-review" \
-  "architecture-loop references architecture-review"
+  "architect references architecture-review"
 assert_file_contains "$LOOP_SKILL" "implementer-prompt" \
-  "architecture-loop references implementer-prompt"
+  "architect references implementer-prompt"
 assert_file_contains "$LOOP_SKILL" "review-output-format" \
-  "architecture-loop references review-output-format"
+  "architect references review-output-format"
 assert_file_contains "$LOOP_SKILL" "approval-criteria" \
-  "architecture-loop references approval-criteria"
+  "architect references approval-criteria"
 assert_file_contains "$LOOP_SKILL" "safety valve" \
-  "architecture-loop documents safety valve"
+  "architect documents safety valve"
 
 # ── Skills with Integration sections have them at the end ────────────────────
 
@@ -98,8 +98,8 @@ USING="${SKILLS_DIR}/using-arxitect/SKILL.md"
 
 assert_file_contains "$USING" "architecture-review" \
   "using-arxitect lists architecture-review"
-assert_file_contains "$USING" "architecture-loop" \
-  "using-arxitect lists architecture-loop"
+assert_file_contains "$USING" "architect" \
+  "using-arxitect lists architect"
 assert_file_contains "$USING" "oo-design-review" \
   "using-arxitect lists oo-design-review"
 assert_file_contains "$USING" "clean-architecture-review" \

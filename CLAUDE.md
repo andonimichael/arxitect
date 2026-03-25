@@ -11,7 +11,7 @@ contains implementation and code review agents.
 - `.codex/` - Installation instructions for ChatGPT Codex
 - `.cursor/` - Installation instructions for Cursor
 - `.cursor-plugin/` - Plugin manifest for Cursor registration
-- `agents/` - The architecture-loop and architecture-review agents
+- `agents/` - The architect and architecture-review agents
 - `hooks/` - Session lifecycle hooks (bootstrap injection)
 - `scripts/` - The release script
 - `skills/` - Core skills, each in its own directory with a `SKILL.md`

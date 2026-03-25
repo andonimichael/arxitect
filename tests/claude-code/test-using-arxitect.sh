@@ -10,10 +10,10 @@ require_claude
 echo "=== Test: using-arxitect skill ==="
 echo ""
 
-# Test 1: Knows when architecture-loop is mandatory
-echo "Test 1: When to use architecture-loop..."
+# Test 1: Knows when architect is mandatory
+echo "Test 1: When to use architect..."
 
-output=$(run_claude "According to arxitect:using-arxitect, when MUST you use the architecture-loop skill? List the conditions." 30)
+output=$(run_claude "According to arxitect:using-arxitect, when MUST you use the architect skill? List the conditions." 30)
 
 assert_contains "$output" "new feature\|new module\|implement" "New features require the loop" || exit 1
 assert_contains "$output" "refactor" "Refactoring requires the loop" || exit 1
@@ -24,7 +24,7 @@ echo ""
 # Test 2: Distinction between loop and review
 echo "Test 2: Loop vs review decision..."
 
-output=$(run_claude "According to arxitect:using-arxitect, when should you use architecture-review instead of architecture-loop?" 30)
+output=$(run_claude "According to arxitect:using-arxitect, when should you use architecture-review instead of architect?" 30)
 
 assert_contains "$output" "existing\|without.*chang\|read.only\|review.*only\|no.*implement" "Review for existing code" || exit 1
 
@@ -44,7 +44,7 @@ echo "Test 4: Available skills listing..."
 
 output=$(run_claude "What skills are available through Arxitect? List them all." 30)
 
-assert_contains "$output" "architecture-loop" "Lists architecture-loop" || exit 1
+assert_contains "$output" "architect" "Lists architect" || exit 1
 assert_contains "$output" "architecture-review" "Lists architecture-review" || exit 1
 assert_contains "$output" "oo-design-review" "Lists oo-design-review" || exit 1
 assert_contains "$output" "clean-architecture-review" "Lists clean-architecture-review" || exit 1

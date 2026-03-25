@@ -1,9 +1,9 @@
 ---
-name: architecture-loop
+name: architect
 description: Orchestrates an architecture-enforced implementation feedback loop. Implements code, then runs Object Oriented Design, Clean Architecture, and API Design reviews, iterating until all reviewers approve or the safety valve triggers. Use when implementing code that should meet design quality standards.
 ---
 
-# Architecture Feedback Loop
+# Architect
 
 You are orchestrating a feedback loop that ensures code meets object-oriented
 design, clean architecture, and API design standards.
@@ -24,8 +24,8 @@ Follow these steps exactly. Do not skip or combine steps.
 Read these orchestration files (not the reviewer reference material — each
 reviewer reads its own):
 
-- `skills/architecture-loop/review-output-format.md`
-- `skills/architecture-loop/approval-criteria.md`
+- `skills/architect/review-output-format.md`
+- `skills/architect/approval-criteria.md`
 
 ### Step 2: Implement
 
@@ -44,7 +44,7 @@ If superpowers is available, use its planning and execution workflow:
    verifiable steps
 2. Use the superpowers execution skill to implement each step
 3. Tell the implementer to read
-   `skills/architecture-loop/implementer-prompt.md` for design guidelines
+   `skills/architect/implementer-prompt.md` for design guidelines
 4. Provide the user's task description and any review feedback from prior
    iterations
 
@@ -59,7 +59,7 @@ If both are available:
 2. Exit plan mode
 3. Spawn a Code Implementer agent with full tool access (Read, Write, Edit,
    Bash, Glob, Grep). Tell it to read
-   `skills/architecture-loop/implementer-prompt.md` for its guidelines,
+   `skills/architect/implementer-prompt.md` for its guidelines,
    then provide:
    - The user's task description
    - The plan produced above
@@ -70,7 +70,7 @@ If both are available:
 If neither superpowers nor native plan + agent tools are available,
 implement the changes directly:
 
-1. Read `skills/architecture-loop/implementer-prompt.md` for design
+1. Read `skills/architect/implementer-prompt.md` for design
    guidelines
 2. Design the component structure before writing code
 3. Implement the changes yourself using available file tools
@@ -125,7 +125,7 @@ Otherwise, return to Step 2 with the feedback document as review feedback.
 Three iterations have completed. Check remaining findings:
 
 - **If CRITICAL findings remain**: Present them to the user with this
-  message: "The architecture feedback loop has completed 3 iterations.
+  message: "The architect has completed 3 iterations.
   The following CRITICAL findings remain unresolved: [list]. How would you
   like to proceed?"
 
@@ -163,11 +163,11 @@ Present the final summary to the user:
   `superpowers:` prefixed skills.
 
 **Orchestration files (read by this skill):**
-- `skills/architecture-loop/implementer-prompt.md` — Guidelines for the
+- `skills/architect/implementer-prompt.md` — Guidelines for the
   Code Implementer agent
-- `skills/architecture-loop/review-output-format.md` — Structured output
+- `skills/architect/review-output-format.md` — Structured output
   format all reviewers must follow
-- `skills/architecture-loop/approval-criteria.md` — Verdict rules and
+- `skills/architect/approval-criteria.md` — Verdict rules and
   safety valve logic
 
 **Alternative workflow:**

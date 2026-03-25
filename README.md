@@ -23,11 +23,11 @@ When you ask your coding agent to implement something, Arxitect provides sub-age
 ## What it contains
 
 Arxitect contains the following agents:
-  - `@architecture-loop` that will plan and implement your change using best practices.
+  - `@architect` that will plan and implement your change using best practices.
   - `@architecture-review` that will review your code for adherence to best practices.
 
 And it contains the following skills:
-  - `/architecture-loop` that will plan and implement your change using best practices.
+  - `/architect` that will plan and implement your change using best practices.
   - `/architecture-review` that will review your code for adherence to best practices.
   - `/api-design-review` that will audit your code for adherence to api design principles.
   - `/oo-design-review` that will audit your code for adherence to object oriented design principles.

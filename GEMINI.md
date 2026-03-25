@@ -17,15 +17,15 @@ Use skills when applicable:
 
 | Skill | When to Use |
 |-------|-------------|
-| `arxitect:architecture-loop` | Implementing code with architecture enforcement. Runs the full implement → review → iterate loop. |
+| `arxitect:architect` | Implementing code with architecture enforcement. Runs the full implement → review → iterate loop. |
 | `arxitect:architecture-review` | Run all three reviewers in parallel against existing code. No implementation, comprehensive review only. |
 | `arxitect:oo-design-review` | Standalone object oriented design review. No implementation, review only. |
 | `arxitect:clean-architecture-review` | Standalone architecture review. No implementation, review only. |
 | `arxitect:api-design-review` | Standalone API design review. No implementation, review only. |
 
-## When You MUST Use the Architecture Loop
+## When You MUST Use the Architect
 
-Invoke `arxitect:architecture-loop` before writing code when ANY of these
+Invoke `arxitect:architect` before writing code when ANY of these
 apply:
 
 - The user asks to implement a new feature or module
@@ -40,9 +40,9 @@ Invoke `arxitect:architecture-review` when:
 
 - Reviewing existing code without making changes
 - The user asks for a comprehensive design review
-- Evaluating code written outside the architecture loop
-- Code written outside of the architecture loop affects several files across module boundaries
-- Code written outside of the architecture loop introduced new classes, interfaces, or abstractions
+- Evaluating code written outside the architect
+- Code written outside of the architect affects several files across module boundaries
+- Code written outside of the architect introduced new classes, interfaces, or abstractions
 
 This runs all three reviewers in parallel and produces a combined report.
 
@@ -63,6 +63,6 @@ materials and structured processes that cannot be reliably recalled.
 ## Do Not Skip Skills
 
 If you are about to write code and any of the conditions above apply, you
-MUST invoke the architecture loop or architecture review. The user chose to
+MUST invoke the architect or architecture review. The user chose to
 install Arxitect because they care about their code quality. Respect that
 choice by using it.

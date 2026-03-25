@@ -48,8 +48,8 @@ run_one() {
   echo ""
 }
 
-run_one "architecture-loop" "$PROMPTS_DIR/use-architecture-loop.txt" \
-  "use-architecture-loop"
+run_one "architect" "$PROMPTS_DIR/use-architect.txt" \
+  "use-architect"
 
 run_one "architecture-review" "$PROMPTS_DIR/run-architecture-review.txt" \
   "run-architecture-review"

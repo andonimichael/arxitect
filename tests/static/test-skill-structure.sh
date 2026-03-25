@@ -33,14 +33,14 @@ for reviewer in "${REVIEWERS[@]}"; do
   assert_file_not_empty "$agent_prompt" "skills/${reviewer}/agent-prompt.md not empty"
 done
 
-# ── Orchestration files referenced by architecture-loop ──────────────────────
+# ── Orchestration files referenced by architect ──────────────────────
 
-begin_suite "Architecture Loop Orchestration Files"
+begin_suite "Architect Orchestration Files"
 
 LOOP_FILES=(
-  "skills/architecture-loop/implementer-prompt.md"
-  "skills/architecture-loop/review-output-format.md"
-  "skills/architecture-loop/approval-criteria.md"
+  "skills/architect/implementer-prompt.md"
+  "skills/architect/review-output-format.md"
+  "skills/architect/approval-criteria.md"
 )
 
 for f in "${LOOP_FILES[@]}"; do

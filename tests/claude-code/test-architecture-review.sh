@@ -58,10 +58,10 @@ assert_contains "$output" "preserve\|structured\|detail\|not.*summarize" "Preser
 
 echo ""
 
-# Test 6: Distinction from architecture-loop
-echo "Test 6: Distinction from architecture-loop..."
+# Test 6: Distinction from architect
+echo "Test 6: Distinction from architect..."
 
-output=$(run_claude "What is the difference between arxitect:architecture-review and arxitect:architecture-loop? When would you use each?" 30)
+output=$(run_claude "What is the difference between arxitect:architecture-review and arxitect:architect? When would you use each?" 30)
 
 assert_contains "$output" "read.only\|review.*only\|without.*implement\|no.*implement" "Review is read-only" || exit 1
 assert_contains "$output" "loop\|iterate\|feedback\|implement" "Loop includes implementation" || exit 1

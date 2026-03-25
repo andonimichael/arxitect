@@ -90,7 +90,7 @@ reviewers or compound across domains.]
 - **Progressive disclosure.** Do not pre-load reviewer reference files.
   Each agent reads its own material.
 - **Preserve finding structure.** The structured finding format enables
-  downstream use (e.g., feeding findings into the architecture loop).
+  downstream use (e.g., feeding findings into the architect).
   Do not summarize away the detail.
 
 ## Integration
@@ -101,9 +101,9 @@ reviewers or compound across domains.]
 - **arxitect:api-design-review** — API design reviewer
 
 **Orchestration files (read by this skill):**
-- `skills/architecture-loop/review-output-format.md` — Structured output
+- `skills/architect/review-output-format.md` — Structured output
   format all reviewers must follow
 
 **Alternative workflow:**
-- **arxitect:architecture-loop** — Use when you want the implement-iterate
-  feedback loop, not just a read-only review
+- **arxitect:architect** — Use when you want implementation with
+  architecture enforcement, not just a read-only review

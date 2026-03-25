@@ -29,7 +29,7 @@ definitions — for usability, clarity, and self-documentation.
    the REST best practices in `rest-endpoint-design.md`.
 
 6. **Produce structured output.** Follow the review output format defined in
-   `skills/architecture-loop/review-output-format.md`. Every finding must
+   `skills/architect/review-output-format.md`. Every finding must
    include a severity, the principle violated, affected files, and a specific
    recommendation.
 

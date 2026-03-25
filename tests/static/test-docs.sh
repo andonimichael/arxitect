@@ -22,7 +22,7 @@ begin_suite "README Skill Coverage"
 README="${PROJECT_ROOT}/README.md"
 
 assert_file_contains "$README" "architecture-review" "README documents architecture-review"
-assert_file_contains "$README" "architecture-loop" "README documents architecture-loop"
+assert_file_contains "$README" "architect" "README documents architect"
 assert_file_contains "$README" "oo-design-review" "README documents oo-design-review"
 assert_file_contains "$README" "clean-architecture-review" "README documents clean-architecture-review"
 assert_file_contains "$README" "api-design-review" "README documents api-design-review"

@@ -41,7 +41,7 @@ while [[ $# -gt 0 ]]; do
       echo "  --help, -h           Show this help"
       echo ""
       echo "Tests:"
-      echo "  test-architecture-loop.sh      Architecture loop skill"
+      echo "  test-architect.sh      Architecture loop skill"
       echo "  test-architecture-review.sh    Architecture review skill"
       echo "  test-reviewers.sh              Individual reviewer skills"
       echo "  test-using-arxitect.sh         Bootstrap skill"
@@ -55,7 +55,7 @@ done
 
 tests=(
   "test-using-arxitect.sh"
-  "test-architecture-loop.sh"
+  "test-architect.sh"
   "test-architecture-review.sh"
   "test-reviewers.sh"
 )

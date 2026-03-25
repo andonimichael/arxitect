@@ -31,7 +31,7 @@ attributes.
    indicators.
 
 6. **Produce structured output.** Follow the review output format defined in
-   `skills/architecture-loop/review-output-format.md`. Every finding must
+   `skills/architect/review-output-format.md`. Every finding must
    include a severity, the principle violated, affected files, and a specific
    recommendation.
 
