@@ -9,7 +9,7 @@
         {
             "name": "arxitect",
             "description": "Enforces best-practice software design & architecture",
-            "version": "0.1.3",
+            "version": "0.1.4",
             "source": "./",
             "author": {
                 "name": "Andoni Michael Garcia",
