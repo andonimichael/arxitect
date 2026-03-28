@@ -11,7 +11,7 @@ contains implementation and code review agents.
 - `.codex/` - Installation instructions for ChatGPT Codex
 - `.cursor/` - Installation instructions for Cursor
 - `.cursor-plugin/` - Plugin manifest for Cursor registration
-- `agents/` - The architect and architecture-review agents
+- `agents/` - Agent definitions (orchestrators and reviewers)
 - `hooks/` - Session lifecycle hooks (bootstrap injection)
 - `scripts/` - The release script
 - `skills/` - Core skills, each in its own directory with a `SKILL.md`
@@ -26,11 +26,18 @@ This plugin is pure Markdown and shell scripts with zero runtime dependencies.
 Each skill lives in `skills/<skill-name>/SKILL.md` with YAML frontmatter
 (`name`, `description`). Supporting reference files live alongside the SKILL.md.
 
-### Subagent Prompts
 
-Subagent prompt templates live alongside their orchestrating skill, not in a
-separate directory. The orchestrator reads these templates and injects them
-into Agent tool calls.
+### Agents
+
+Orchestrator agents (`architect`, `architecture-review`) delegate to their
+corresponding skills. Reviewer agents (`oo-design-reviewer`,
+`clean-architecture-reviewer`, `api-design-reviewer`) are spawned by the
+architecture-review orchestrator with read-only tools, pre-loaded skills,
+and persistent local memory. `reviewer-memory-guide.md` is a shared guide
+for what reviewers should remember across reviews.
+
+Subagent prompt templates (`agent-prompt.md`) live alongside their skill as
+a fallback for environments that do not support named agent definitions.
 
 ### Commits
 

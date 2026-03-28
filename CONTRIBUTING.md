@@ -73,8 +73,10 @@ Each skill lives in `skills/<skill-name>/` and contains:
 - **Progressive disclosure** — Skills should only add as much initial context
   as necessary. All additional context, instructions, grading criteria, etc.
   should be progressively disclosed as skills are run via file pointers.
-- **Subagent templates are minimal** — `agent-prompt.md` files establish the bare
-  minimum to run the agent and then should point to the corresponding SKILL.md.
+- **Named agents over inline prompts** — Reviewer agents have dedicated
+  definitions in `agents/` with pre-loaded skills, tool restrictions, and
+  memory. The `agent-prompt.md` files remain as fallbacks for environments
+  that do not support named agent definitions.
 - **Reference material is skill-scoped** — Each reviewer owns its own
   reference files for isolation.
 
@@ -109,7 +111,9 @@ Each skill lives in `skills/<skill-name>/` and contains:
 
 ### Agent Structure
 
-Each agent is a single Markdown file in `agents/` with markdown frontmatter:
+Each agent is a single Markdown file in `agents/` with markdown frontmatter.
+
+**Orchestrator agents** (architect, architecture-review) coordinate skills:
 
 ```markdown
 name: <agent-name>
@@ -119,8 +123,29 @@ skills:
   - <corresponding-skill-name>
 ```
 
-The instructions for agents should be straight forward and mostly delegate out to
-their corresponding skills.
+**Reviewer agents** (oo-design-reviewer, clean-architecture-reviewer,
+api-design-reviewer) are spawned by the architecture-review orchestrator
+with restricted configuration:
+
+```markdown
+name: <reviewer-name>
+description: One-line description of the reviewer.
+model: inherit
+tools: Read, Glob, Grep
+permissionMode: dontAsk
+memory: local
+skills:
+  - <corresponding-review-skill>
+```
+
+- `tools` restricts reviewers to read-only access.
+- `permissionMode: dontAsk` avoids permission prompts for read-only tools.
+- `memory: local` gives reviewers persistent memory about the codebase
+  (gitignored). See `agents/reviewer-memory-guide.md` for what reviewers
+  should remember.
+
+Agent instructions should be straightforward and mostly delegate to their
+corresponding skills.
 
 ### Modifying Existing Agents
 
