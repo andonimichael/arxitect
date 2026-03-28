@@ -101,3 +101,11 @@ gemini extensions install https://github.com/andonimichael/arxitect
 ### Verify Installation
 
 Ask your client about Arxitect or ask your agent to review your code's architecture. It should automatically invoke the relevant Arxitect skill.
+
+## Common Use Patterns
+
+1. Run an architecture review for the module `x/`
+2. Design and implement a new feature `Y`.
+3. Please review your changes for software design principles.
+4. Does class `Z` follow good object oriented design?
+5. Build me new API routes for class `Z`.

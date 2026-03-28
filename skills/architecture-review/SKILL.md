@@ -27,36 +27,44 @@ Build a file list: one file path per line.
 
 ### Step 2: Dispatch Reviewers
 
-Spawn all three reviewers using the Agent tool. Each reviewer must have
-**read-only** access (Read, Glob, Grep only) — it must not modify any
+Spawn all three reviewers as sub-agents using the Agent tool. Each reviewer
+must have **read-only** access (Read, Glob, Grep only) — it must not modify any
 files.
 
 **If the environment supports parallel agents**, dispatch all three in a
 single message so they run concurrently. **If not**, dispatch them one at a
 time in any order.
 
-Each reviewer agent gets a focused prompt with the file list and a pointer
-to its `agent-prompt.md`. The reviewer reads its own skill files — do
-**not** pre-load reference files and inject them into the prompt.
-
-For each reviewer, tell it to read its `agent-prompt.md` for instructions
-and reference material, then provide the file list to review.
-
 The reason we are delegating these tasks to specialized sub-agents is because
-they operate with isolated context and precise instructions that wll better
+they operate with isolated context and precise instructions that will better
 allow them to review the code for their lens.
+
+**If the environment supports named agent definitions** (e.g., Claude Code
+`subagent_type`), use the dedicated reviewer agents below. They are
+pre-configured with read-only tools and pre-loaded review skills. Pass only
+the file list and any additional context in the prompt.
+
+**If not**, spawn generic agents and tell each to read its `agent-prompt.md`
+for instructions and reference material. Restrict tool access to Read, Glob,
+Grep if the environment supports tool restrictions on agent spawning.
 
 #### Object Oriented Design Reviewer
 
-Tell the agent to read `skills/oo-design-review/agent-prompt.md`.
+Named agent: `subagent_type: "oo-design-reviewer"`
+Fallback prompt: Tell the agent to read
+`skills/oo-design-review/agent-prompt.md`.
 
 #### Clean Architecture Reviewer
 
-Tell the agent to read `skills/clean-architecture-review/agent-prompt.md`.
+Named agent: `subagent_type: "clean-architecture-reviewer"`
+Fallback prompt: Tell the agent to read
+`skills/clean-architecture-review/agent-prompt.md`.
 
 #### API Design Reviewer
 
-Tell the agent to read `skills/api-design-review/agent-prompt.md`.
+Named agent: `subagent_type: "api-design-reviewer"`
+Fallback prompt: Tell the agent to read
+`skills/api-design-review/agent-prompt.md`.
 
 ### Step 3: Present Combined Report
 
@@ -87,8 +95,9 @@ reviewers or compound across domains.]
 ## Rules
 
 - **Read-only.** No reviewer may modify files.
-- **Progressive disclosure.** Do not pre-load reviewer reference files.
-  Each agent reads its own material.
+- **Progressive disclosure.** Do not pre-load reviewer reference files
+  into prompts. Each agent reads its own material — either via pre-loaded
+  skills (named agents) or by reading its `agent-prompt.md` (fallback).
 - **Preserve finding structure.** The structured finding format enables
   downstream use (e.g., feeding findings into the architect).
   Do not summarize away the detail.
