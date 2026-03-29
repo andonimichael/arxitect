@@ -1,6 +1,6 @@
 {
     "name": "arxitect",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Enforces best-practice software design & architecture",
     "author": {
         "name": "Andoni Michael Garcia",
