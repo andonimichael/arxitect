@@ -6,17 +6,20 @@
 
 Arxitect is an agentic coding plugin that enforces best-practice software design & architecture. It adds implementation agents and architecture reviewers to your client that enforce API Design, Object-Oriented Design, and Clean Architecture standards.
 
+Coding agents often burn context, waste tokens, implement partial solutions, or miss major components of coding tasks because they naturally implement repetitive, brittle, and tactical code. Software design principles weren't meant to be just for humans. They were meant to make all code easier and safer to read, understand, refactor, modify, extend, test, and maintain. Arxitect helps coding agents build robust software through best practice design and architecture. It helps coding agents write better code. And in turn, coding agents become more efficient and more accurate.
+
 <p align="center">
   <img src="assets/images/claude_code_skill_triggering.png" alt="Screenshot: Claude Code skill triggering" width="400"/>
 </p>
+
 
 ## Background
 
 Arxitect was influenced by the design of [Superpowers](https://github.com/obra/superpowers). Arxitect extends Superpower's concept of improving agents at implementing coding tasks to improving agents at broader code architecture and software design.
 
-Modern coding agents are getting exceptionally good at implementing a given coding task. And with validation-in-the-loop, you can be reasonably confident they will implement a correct solution. However, their implementation often doesn't adhere to the decades of software design best-practices that the community has established and is often myopic to broader software quality attributes including maintainability and extensibility. To make things worse, this low code quality compounds as coding agents implement additional tasks.
+Modern coding agents are getting exceptionally good at implementing a given coding task. And with validation-in-the-loop, you can be reasonably confident they will implement a correct solution. However, their implementation often leaves a lot to be desired, Most notably it doesn't adhere to the decades of software design best-practices that the community has established and is often myopic to broader software quality attributes including maintainability and extensibility. To make things worse, this low code quality compounds as coding agents implement additional tasks.
 
-Software design principles weren't established specifically to help humans. They were designed to make code easier to refactor, modify, extend, test, and maintain. They proactively mitigate the risk of bugs. They reduce the surface area for changes. They minimize the amount of information needed to grok the code. All of these are just as important for agents. They reduce the amount of context needed to understand the code and make changes. They reduce the chance of bugs and improve testing efficacy. And they make agents more effective at implementing feature requests.
+Software design principles weren't established specifically to help humans. They were designed to make code easier to read, understand, refactor, modify, extend, test, and maintain. They proactively mitigate the risk of bugs. They reduce the surface area for changes. They minimize the amount of information needed to grok the code. All of these are just as important for agents. They reduce the amount of context needed to understand the code and make changes. They reduce the chance of bugs and improve testing efficacy. And they make agents more effective at implementing feature requests.
 
 ## How it works
 
